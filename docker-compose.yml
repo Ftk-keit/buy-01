@@ -75,7 +75,7 @@ services:
         container_name: api-gateway
         restart: unless-stopped
         ports:
-            - "8080:8080"
+            - "8084:8084"
         environment:
             -   EUREKA_SERVER_PORT=${EUREKA_SERVER_PORT}
             -   SPRING_PROFILES_ACTIVE=docker
@@ -87,7 +87,7 @@ services:
         networks:
             - buy01-network
         healthcheck:
-            test: [ "CMD", "curl", "-kf", "https://localhost:8080/actuator/health" ]
+            test: [ "CMD", "curl", "-kf", "https://localhost:8084/actuator/health" ]
             interval: 30s
             timeout: 10s
             retries: 2

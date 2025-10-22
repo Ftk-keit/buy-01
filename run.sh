@@ -23,7 +23,7 @@ kill_processes() {
 	# shellcheck disable=SC2046
 	kill -9 $(lsof -t -i:8761)
 	# shellcheck disable=SC2046
-	kill -9 $(lsof -t -i:8080)
+	kill -9 $(lsof -t -i:8084)
 	# shellcheck disable=SC2046
 	kill -9 $(lsof -t -i:8081)
 	# shellcheck disable=SC2046
