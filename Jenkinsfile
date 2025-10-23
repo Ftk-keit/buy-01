@@ -53,6 +53,12 @@ pipeline {
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true, excludes: '**/*-original.jar'
             }
         }
+        stage('Finition') {
+            steps {
+                echo 'Alors la ma go t\'a assuré'
+            }
+
+        }
     }
 
     post {
