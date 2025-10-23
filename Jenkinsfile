@@ -55,7 +55,7 @@ pipeline {
         }
         stage('Finition') {
             steps {
-                echo 'Alors la ma go t\'a assuré'
+                echo 'Alors là ma go t\'as assuré'
             }
 
         }
