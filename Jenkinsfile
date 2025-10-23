@@ -16,7 +16,7 @@ pipeline {
         stage('📋 Info') {
             steps {
                 echo "════════════════════════════════════════"
-                echo "Coucou Fatima Keita"
+                echo "Coucou Fatima "
                 echo "🚀 Démarrage du build #${env.BUILD_NUMBER}"
                 echo "📦 Application: ${APP_NAME}"
                 echo "🌿 Branche: ${env.GIT_BRANCH}"
