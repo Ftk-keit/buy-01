@@ -10,7 +10,15 @@ pipeline {
         APP_NAME = 'buy-01'
         SPRING_PROFILES_ACTIVE = 'dev'
         MAVEN_OPTS = '-Dspring.profiles.active=dev'
-
+        
+        // Variables Docker Compose (non-sensibles)
+        EUREKA_SERVER_PORT = '8761'
+        DB_USERNAME = 'mongodb'
+        DB_NAME = 'buy01'
+        DB_HOSTNAME = 'mongodb'
+        DB_PORT = '27017'
+        DB_AUTH_DB = 'admin'
+        KEY_ALIAS = 'buy0x'
     }
 
     stages {
@@ -85,7 +93,16 @@ pipeline {
         }
         stage('Docker Build') {
             steps {
-                sh 'docker compose build'
+                // Injecte les secrets Jenkins dans l'environnement
+                withCredentials([
+                    string(credentialsId: 'db-password', variable: 'DB_PASS'),
+                    string(credentialsId: 'jwt-secret', variable: 'JWT_SECRET'),
+                    string(credentialsId: 'aws-access-key-id', variable: 'AWS_ACCESS_KEY_ID'),
+                    string(credentialsId: 'aws-secret-access-key', variable: 'AWS_SECRET_ACCESS_KEY'),
+                    string(credentialsId: 'keystore-password', variable: 'KEY_STORE_PASSWORD')
+                ]) {
+                    sh 'docker compose build'
+                }
             }
         }
     }
