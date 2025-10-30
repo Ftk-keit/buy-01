@@ -51,7 +51,7 @@ pipeline {
 
         stage('📦 Résultat') {
             steps {
-                echo '✨ Les fichiers JAR ont été créés :'
+                echo 'Les fichiers JAR ont été créés :'
 
                 sh 'find . -name "*.jar" -path "*/target/*" ! -name "*-original.jar" -exec ls -lh {} \\;'
 
