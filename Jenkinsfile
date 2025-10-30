@@ -37,6 +37,7 @@ pipeline {
             steps {
                 echo 'Compilation des tests jUnit '
                 sh 'mvn clean package '
+                junit '**/target/surefire-reports/*.xml'
             }
             post {
                 success {
@@ -94,9 +95,6 @@ pipeline {
             echo '🎉 ════════════════════════════════════════'
             echo '✅ BUILD RÉUSSI !'
             echo '🎉 ════════════════════════════════════════'
-        }
-        always {
-                 junit '**/target/surefire-reports/*.xml'
         }
         failure {
             echo '❌ ════════════════════════════════════════'
