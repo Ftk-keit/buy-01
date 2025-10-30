@@ -35,7 +35,7 @@ pipeline {
 
         stage('🔨 Build & 🧪 Tests') {
             steps {
-                echo 'Compilation des tests jUnit'
+                echo 'Compilation des tests jUnit '
                 sh 'mvn clean package '
             }
             post {
