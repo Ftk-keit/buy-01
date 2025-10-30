@@ -1,0 +1,13 @@
+spring:
+    data:
+        mongodb:
+            uri: mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.t4c1wk3.mongodb.net/
+            database: ${DB_NAME}
+            auto-index-creation: true
+
+eureka:
+    client:
+        register-with-eureka: true
+        fetch-registry: true
+        service-url:
+            defaultZone: http://localhost:${EUREKA_SERVER_PORT}/eureka/
