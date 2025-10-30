@@ -9,7 +9,6 @@ pipeline {
         APP_NAME = 'buy-01'
         SPRING_PROFILES_ACTIVE = 'dev'
         MAVEN_OPTS = '-Dspring.profiles.active=dev'
-        SPRING_PROFILES_ACTIVE=dev
 
 
     }
