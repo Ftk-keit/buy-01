@@ -3,6 +3,7 @@ pipeline {
     tools {
         maven 'Maven3'
         jdk 'JDK17'
+        nodejs 'NodeJS 20'
     }
 
     environment {
@@ -13,10 +14,15 @@ pipeline {
     }
 
     stages {
+        stage('Tests back') {
+            steps {
+                echo "Coucou Ftk "
+                echo 'Démarrage des tests du back'
+            }
+        }
         stage('📋 Info') {
             steps {
                 echo "════════════════════════════════════════"
-                echo "Coucou Fatima Keita "
                 echo "🚀 Démarrage du build #${env.BUILD_NUMBER}"
                 echo "📦 Application: ${APP_NAME}"
                 echo "🌿 Branche: ${env.GIT_BRANCH}"
@@ -59,7 +65,27 @@ pipeline {
             steps {
                 echo 'Alors là ma go t\'as assuré'
             }
-
+        }
+        stage('Tests front') {
+            steps {
+                dir('frontend') {
+                    echo 'Démarrage de l\'installation des dépendances'
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Build front') {
+            steps {
+                dir('frontend') {
+                    echo 'Démarrage du build'
+                    sh 'npm run build'
+                }
+            }
+        }
+        stage('Docker Build') {
+            steps {
+                sh 'docker-compose build'
+            }
         }
     }
 

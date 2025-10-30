@@ -1,6 +1,7 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {Add} from './add';
+import {provideHttpClient} from '@angular/common/http';
 
 describe('Add', () => {
     let component: Add;
@@ -8,7 +9,10 @@ describe('Add', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [Add]
+            imports: [Add],
+            providers:[
+                provideHttpClient()
+            ]
         })
             .compileComponents();
 

@@ -1,6 +1,8 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {Register} from './register';
+import {provideHttpClient} from '@angular/common/http';
+import {ActivatedRoute} from '@angular/router';
 
 describe('Register', () => {
     let component: Register;
@@ -8,7 +10,16 @@ describe('Register', () => {
 
     beforeEach(async () => {
         await TestBed.configureTestingModule({
-            imports: [Register]
+            imports: [Register],
+            providers:[
+                provideHttpClient(),
+                {
+                    provide: ActivatedRoute,
+                    useValue: {
+                        snapshot: { paramMap: { get: () => null } },
+                    },
+                },
+            ]
         })
             .compileComponents();
 

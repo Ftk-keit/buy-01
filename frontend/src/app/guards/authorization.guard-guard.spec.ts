@@ -1,17 +1,20 @@
-import {TestBed} from '@angular/core/testing';
-import {CanActivateFn} from '@angular/router';
+import { TestBed } from '@angular/core/testing';
+import { AuthorizationGuard } from './authorization.guard';
+import {provideHttpClient} from '@angular/common/http';
 
-import {AuthorizationGuard} from './authorization.guard';
-
-describe('authorizationGuardGuard', () => {
-    const executeGuard: CanActivateFn = (...guardParameters) =>
-        TestBed.runInInjectionContext(() => AuthorizationGuard(...guardParameters));
+describe('AuthorizationGuard', () => {
+    let guard: AuthorizationGuard;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({});
+        TestBed.configureTestingModule({
+            providers:[
+                provideHttpClient()
+            ]
+        });
+        guard = TestBed.inject(AuthorizationGuard);
     });
 
-    it('should be created', () => {
-        expect(executeGuard).toBeTruthy();
+    it('devrait être créé', () => {
+        expect(guard).toBeTruthy();
     });
 });
