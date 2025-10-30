@@ -10,7 +10,6 @@ pipeline {
         SPRING_PROFILES_ACTIVE = 'dev'
         MAVEN_OPTS = '-Dspring.profiles.active=dev'
 
-
     }
 
     stages {
@@ -28,20 +27,10 @@ pipeline {
             }
         }
 
-        stage('🔨 Build') {
-            steps {
-                echo '⚙️  Compilation du projet Spring Boot...'
-
-                sh 'mvn clean package -DskipTests'
-
-                echo '✅ Compilation terminée !'
-            }
-        }
-
-        stage('🧪 Tests') {
+        stage('🔨 Build & 🧪 Tests') {
             steps {
                 echo 'Compilation des tests jUnit'
-                sh 'mvn clean test -DskipTests=false'
+                sh 'mvn clean package '
             }
             post {
                 success {
@@ -60,14 +49,11 @@ pipeline {
 
                 sh 'find . -name "*.jar" -path "*/target/*" ! -name "*-original.jar" -exec ls -lh {} \\;'
 
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true, excludes: '**/*-original.jar'
+                archiveArtifacts artifacts: '**/target/*.jar',
+                                                fingerprint: true,
+                                                excludes: '**/*-original.jar',
+                                                allowEmptyArchive: true
             }
-        }
-        stage('Package') {
-                    steps {
-                        echo '📦 Packaging du projet...'
-                        sh 'mvn clean package -DskipTests'
-                    }
         }
         stage('Finition') {
             steps {
