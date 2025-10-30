@@ -14,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
+@Profile("!test")
 public class DataInitializer {
 
     private final UserRepository userRepository;
