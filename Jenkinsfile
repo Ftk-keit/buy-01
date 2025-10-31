@@ -191,11 +191,51 @@ pipeline {
             echo '🎉 ════════════════════════════════════════'
             echo '✅ BUILD RÉUSSI !'
             echo '🎉 ════════════════════════════════════════'
+
+            emailext (
+                subject: "✅ BUILD SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <html>
+                    <body>
+                        <h2 style="color: green;">✅ Build Réussi !</h2>
+                        <p><b>Projet:</b> ${env.JOB_NAME}</p>
+                        <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+                        <p><b>Branche:</b> ${env.GIT_BRANCH}</p>
+                        <p><b>Durée:</b> ${currentBuild.durationString}</p>
+                        <p><b>Voir le build:</b> <a href="${env.BUILD_URL}">${env.BUILD_URL}</a></p>
+                        <hr>
+                        <p style="color: green;">🎉 Tous les tests sont passés et le déploiement est réussi !</p>
+                    </body>
+                    </html>
+                """,
+                mimeType: 'text/html',
+                to: 'fatimakeite05@gmail.com'
+            )
         }
         failure {
             echo '❌ ════════════════════════════════════════'
             echo '💥 BUILD ÉCHOUÉ !'
             echo '❌ ════════════════════════════════════════'
+
+            emailext (
+                subject: "❌ BUILD FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                    <html>
+                    <body>
+                        <h2 style="color: red;">❌ Build Échoué !</h2>
+                        <p><b>Projet:</b> ${env.JOB_NAME}</p>
+                        <p><b>Build:</b> #${env.BUILD_NUMBER}</p>
+                        <p><b>Branche:</b> ${env.GIT_BRANCH}</p>
+                        <p><b>Erreur:</b> ${currentBuild.result}</p>
+                        <p><b>Voir les logs:</b> <a href="${env.BUILD_URL}console">${env.BUILD_URL}console</a></p>
+                        <hr>
+                        <p style="color: red;">⚠️ Une erreur s'est produite. Vérifiez les logs pour plus de détails.</p>
+                    </body>
+                    </html>
+                """,
+                mimeType: 'text/html',
+                to: 'fatimakeite05@gmail.com'
+            )
         }
     }
 }
