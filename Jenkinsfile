@@ -116,10 +116,10 @@ pipeline {
                     ]) {
 
                        sh '''
-                       echo "Sauvegarde des images actuelles..."
-                       docker images --format "{{.Repository}:{{.Tag}}" | grep buy-01| while read image;
-                       do docker tag $image ${image}-backup || true
-                       done
+                           echo "Sauvegarde des images actuelles..."
+                           docker images --format '{{.Repository}}:{{.Tag}}' | grep buy-01 | while read image; do
+                               docker tag "$image" "${image}-backup" || true
+                           done
                        '''
 
                        sh 'docker compose down || true'
