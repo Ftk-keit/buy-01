@@ -53,7 +53,7 @@ class MediaControllerImplTest  {
     @Test
     void createMedia() throws Exception{
         List<MultipartFile> multipartFiles = List.of(
-                new MockMultipartFile("imagePath", "test1.jpg", "image/jpeg", "FAKE_IMAGE_CONTENT_1".getBytes()),
+                new MockMultipartFile("imagePath", "test2.jpg", "image/jpeg", "FAKE_IMAGE_CONTENT_1".getBytes()),
                 new MockMultipartFile("imagePath", "avatar.png", "image/png", "FAKE_IMAGE_CONTENT_2".getBytes()),
                 new MockMultipartFile("imagePath", "test1.jpg", "image/jpeg", "FAKE_IMAGE_CONTENT_1".getBytes()),
                 new MockMultipartFile("imagePath", "avatar.png", "image/png", "FAKE_IMAGE_CONTENT_2".getBytes())
