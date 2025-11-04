@@ -40,8 +40,7 @@ pipeline {
         }
 
         stage('🔨 Build & 🧪 Tests') {
-                sh 'java -version'
-                sh 'mvn -version' steps {
+            steps {
                 echo 'Compilation des tests jUnit '
                 sh 'mvn clean package '
                 junit '**/target/surefire-reports/*.xml'
